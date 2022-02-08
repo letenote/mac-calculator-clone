@@ -1,0 +1,4 @@
+export enum ConfigActionTypes {
+  CHANGE_DARKMODE = "CHANGE_DARKMODE",
+  CHANGE_LIGHTMODE = "CHANGE_LIGHTMODE"
+}
