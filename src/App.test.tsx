@@ -1,11 +1,9 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
-import { render, screen } from '@testing-library/react';
+import { render } from './test-utils';
 import App from './App';
 import { Provider } from "react-redux"
-import { store } from "./redux/store"; 
-import {initialState, bankReducer} from './redux/reducers/bank-reducer/index';
-import { BankActionTypes } from "./redux/reducers/bank-reducer/action-types";
+import { store } from "./redux/store";
 
 // get real redux store
 // https://reactjs.org/docs/test-renderer.html
@@ -23,6 +21,7 @@ beforeEach(() => {
 describe('__REDUX_CONNECTED', () => {
   it('create snapshoot', () => {
     const tree = myApp.toJSON();
+    console.log("tree",tree)
     expect(tree).toMatchSnapshot();
   });
 });

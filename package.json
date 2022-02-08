@@ -66,6 +66,7 @@
       "test-config",
       "interface",
       "interfaces",
+      "constant",
       "action-types",
       "jestGlobalMocks.ts",
       ".module.ts",
@@ -91,7 +92,6 @@
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-redux": "^7.2.6",
-    "react-textfit": "^1.1.1",
     "redux": "^4.1.2",
     "redux-thunk": "^2.4.1",
     "typescript": "^4.5.5"
@@ -112,7 +112,6 @@
     "@types/react-dom": "^17.0.11",
     "@types/react-redux": "^7.1.22",
     "@types/react-test-renderer": "^17.0.1",
-    "@types/react-textfit": "^1.1.0",
     "babel-loader": "^8.2.3",
     "babel-polyfill": "^6.26.0",
     "clean-webpack-plugin": "^4.0.0",

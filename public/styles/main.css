@@ -89,7 +89,7 @@ button {
 }
 
 button:hover {
-  filter: brightness(95%);
+  filter: brightness(85%);
 }
 
 .miniButton {
@@ -101,7 +101,6 @@ button:hover {
 .calculator-box {
   height: 320px;
   width: 230px;
-  background-color: #58565b;
   position: absolute;
   transform: translate(-50%, -50%);
   top: 50%;
@@ -121,4 +120,16 @@ button:hover {
   flex: 1;
   font-weight: 200;
   align-self: flex-end;
+}
+
+.theme_button {
+  position: absolute;
+  right: 15px;
+  top: 15px;
+  font-size: 10px;
+  cursor: pointer;
+  border: 1px solid;
+  padding: 3px 10px;
+  border-radius: 15px;
+  font-weight: 900;
 }
