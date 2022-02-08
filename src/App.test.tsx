@@ -3,9 +3,7 @@ import renderer from 'react-test-renderer';
 import { render, screen } from '@testing-library/react';
 import App from './App';
 import { Provider } from "react-redux"
-import { store } from "./redux/store"; 
-import {initialState, bankReducer} from './redux/reducers/bank-reducer/index';
-import { BankActionTypes } from "./redux/reducers/bank-reducer/action-types";
+import { store } from "./redux/store";
 
 // get real redux store
 // https://reactjs.org/docs/test-renderer.html
