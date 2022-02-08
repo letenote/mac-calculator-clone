@@ -1,9 +1,13 @@
 import React from "react";
+import Screen from './components/Screen';
+import Keypad from './components/Keypad';
 
 const App: React.FC<{}> = () => {
+  // document.body.style.backgroundColor = '#24272a'
   return (
-    <div style={{ display: "flex", flexDirection: "column" }}>
-      <h1>Hello world</h1>
+    <div className="calculator-box">
+      <Screen/>
+      <Keypad/>
     </div>
   );
 };
