@@ -1,6 +1,6 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
-import { render, screen } from '@testing-library/react';
+import { render } from './test-utils';
 import App from './App';
 import { Provider } from "react-redux"
 import { store } from "./redux/store";
@@ -21,6 +21,7 @@ beforeEach(() => {
 describe('__REDUX_CONNECTED', () => {
   it('create snapshoot', () => {
     const tree = myApp.toJSON();
+    console.log("tree",tree)
     expect(tree).toMatchSnapshot();
   });
 });

@@ -1,11 +1,12 @@
-import React, { CSSProperties, FC, memo } from "react";
+import React, { CSSProperties, FC, Fragment, memo } from "react";
 import { useSelector } from "react-redux";
 import { RootState } from "../redux/reducers";
-import { Textfit } from 'react-textfit';
+import {calculate} from '../helper/calculate';
 
 const screenGroupStyles: CSSProperties = {
   height: "25%", 
-  padding: 10
+  padding: "10px 10px 0px 10px",
+  display: "flex"
 }
 
 const miniButtonGroupStyles: CSSProperties = {
@@ -17,6 +18,7 @@ const miniButtonGroupStyles: CSSProperties = {
 
 const Screen: FC= () => {
   const app_config = useSelector((state: RootState) => state.config)
+  console.log("calculate", calculate( '0-9' ))
   return(
     <div style={screenGroupStyles}>
       <div style={miniButtonGroupStyles}>
@@ -28,14 +30,14 @@ const Screen: FC= () => {
           })
         }
       </div>
-      <Textfit
-        max={55}
-        throttle={10}
-        mode="single"
-        className="screen-top"
+      <p 
+        className="screen-top" 
+        style={{ 
+          fontSize: "clamp(1rem, -0.875rem + 8.333vw, 3.5rem)" 
+        }}
       >
-        0
-      </Textfit>
+        100
+      </p>
     </div>
   )
 };
