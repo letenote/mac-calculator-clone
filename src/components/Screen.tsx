@@ -18,7 +18,7 @@ const miniButtonGroupStyles: CSSProperties = {
 
 const Screen: FC= () => {
   const app_config = useSelector((state: RootState) => state.config)
-  console.log("calculate", calculate( '0-9' ))
+  console.log("calculate is error", calculate( '*30-6' ))
   return(
     <div style={screenGroupStyles}>
       <div style={miniButtonGroupStyles}>
