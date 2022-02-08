@@ -16,9 +16,10 @@
   "scripts": {
     "dev": "rm -rf dist && cross-env NODE_ENV=development webpack-dev-server --open",
     "staging": "rm -rf build && npm run prod && serve -s -p 8989 build",
-    "prod": "rm -rf build && cross-env NODE_ENV=production webpack",
-    "build-serve": "rm -rf build && npm run prod && serve -s -p 8989",
-    "test": "jest --env=jsdom --updateSnapshot --watchAll",
+    "prod": "rm -rf build && npm run test:clean && npm run test && cross-env NODE_ENV=production webpack",
+    "build:serve": "rm -rf build && npm run prod && serve -s -p 8989",
+    "test": "jest --env=jsdom --updateSnapshot",
+    "test:watch": "jest --env=jsdom --updateSnapshot --watchAll",
     "test:coverage": "jest --env=jsdom --updateSnapshot --collectCoverage",
     "test:coverage-open": "open src/__coverage__/lcov-report/index.html",
     "test:clean": "rm -r src/__snapshots__ && rm -r src/__coverage__"
@@ -57,7 +58,7 @@
       "<rootDir>/bower_components/",
       "<rootDir>/node_modules/"
     ],
-    "collectCoverage": true,
+    "collectCoverage": false,
     "collectCoverageFrom": [
       "src/**/*.tsx"
     ],
