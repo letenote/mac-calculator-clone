@@ -1,3 +1,10 @@
+:root {
+  --disabled-opacity: 0.8;
+  --disabled-cursor: not-allowed;
+  --disabled-background-color: #ededed;
+  --disabled-border-color: #c3c3c3;
+}
+
 @font-face {
   font-family: Poppins-Regular;
   src: local(Poppins-Regular),
@@ -92,6 +99,14 @@ button:hover {
   filter: brightness(85%);
 }
 
+button:disabled {
+  opacity: var(--disabled-opacity);
+  cursor: var(--disabled-cursor);
+  background-color: var(--disabled-background-color);
+  color: rgba(255, 255, 255, 0.411);
+  border-color: var(--disabled-border-color);
+}
+
 .miniButton {
   width: 12px;
   height: 12px;
@@ -133,3 +148,12 @@ button:hover {
   border-radius: 15px;
   font-weight: 900;
 }
+
+/* safary only */
+@media not all and (min-resolution: 0.001dpcm) {
+  @supports (-webkit-appearance: none) {
+    .calculator-box {
+      outline-style: none;
+    }
+  }
+} ;

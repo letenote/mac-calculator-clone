@@ -5,8 +5,8 @@ interface ButtonInterface {
 }
 
 export const buttons: Array<ButtonInterface> = [
-  { id: "button_ac", display: "AC", value: "" },
-  { id: "button_+/-", display: "+/-", value: "-" },
+  { id: "button_ac", display: "AC", value: "AC" },
+  { id: "button_+/-", display: "+/-", value: "+/-" },
   { id: "button_%", display: "%", value: "%" },
   { id: "button_÷", display: "÷", value: "/" },
   { id: "button_7", display: "7", value: "7" },
@@ -22,6 +22,6 @@ export const buttons: Array<ButtonInterface> = [
   { id: "button_3", display: "3", value: "3" },
   { id: "button_+", display: "+", value: "+" },
   { id: "button_0", display: "0", value: "0" },
-  { id: "button_,", display: ",", value: "," },
+  { id: "button_,", display: ",", value: "." },
   { id: "button_=", display: "=", value: "=" },
 ];
