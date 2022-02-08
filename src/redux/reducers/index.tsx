@@ -1,8 +1,10 @@
 import { combineReducers } from 'redux'
 import { ConfigReducer } from './config-reducer';
+import { OutputReducer } from './output-reducer';
 
 const reducers = combineReducers({
-  config: ConfigReducer
+  config: ConfigReducer,
+  screen: OutputReducer
 });
 
 export default reducers;

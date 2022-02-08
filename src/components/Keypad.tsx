@@ -1,7 +1,10 @@
 import React, { CSSProperties, FC, memo } from "react";
+import { useDispatch } from "react-redux";
+import { bindActionCreators } from "redux";
 import { buttons } from "../constant/buttons";
 import { Theme } from "../constant/Theme";
 import { generateButtonBgColor } from "../helper/generateButtonBgColor";
+import * as outputActionCreators from '../redux/actions/output-action';
 
 const keypadContainerStyles: CSSProperties = {
   height: "75%",
@@ -12,6 +15,9 @@ const keypadContainerStyles: CSSProperties = {
 };
 
 const Keypad: FC= () => {
+  const dispatch = useDispatch();
+  const { onChangeOutputAction, onChangeCalculateAction, onChangePercentCalculateAction, onChangeOperatorClickAction } = bindActionCreators(outputActionCreators, dispatch);
+  
   return(
     <div style={keypadContainerStyles}>
       {
@@ -32,7 +38,16 @@ const Keypad: FC= () => {
                 button.id === "button_=" && { "borderBottomRightRadius": "10px" }
               )} 
               type={'button'}
-              onClick={() => {}}
+              disabled={button.id === "button_+/-" ? true : false}
+              onClick={() => {
+                button.value === "="
+                  ? (onChangeOperatorClickAction(button.value),onChangeCalculateAction())
+                  : button.value === "%"
+                    ? onChangePercentCalculateAction()
+                    : button.value === "/" || button.value === "*" || button.value === "-" || button.value === "+"
+                      ? onChangeOperatorClickAction(button.value)
+                      : onChangeOutputAction(button.value)
+              }}
             >
               { button.display }
             </button>

@@ -1,7 +1,7 @@
 import {calculate} from './calculate';
 
 describe('__CALCULATE_TEST_CASE :', () => {
-  let expression;
+  let expression:string
   it ('evaluates the expression correctly', () => {
     expression = '2+3+4-4*3'
     expect(calculate(expression)).toBe(-3);
@@ -29,17 +29,17 @@ describe('__CALCULATE_TEST_CASE :', () => {
   })
 
   it ('should throw an error for expressions starting with any other operator apart from "-" ', () => {
-    expression = '*30-6'
-    expect(calculate(expression)).toThrow();
+    expression = '*30-6';
+    expect(() => calculate(expression)).toThrow();
 
     expression = '*3'
-    expect(calculate(expression)).toThrow();
+    expect(() => calculate(expression)).toThrow();
 
     expression = '+4-6'
-    expect(calculate(expression)).toThrow();
+    expect(() => calculate(expression)).toThrow();
 
     expression = '/4-6'
-    expect(calculate(expression)).toThrow();
+    expect(() => calculate(expression)).toThrow();
   })
 
   it ('ignores trailing operators while evaluating the expression correctly', () => {
