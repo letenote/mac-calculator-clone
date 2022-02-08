@@ -133,3 +133,12 @@ button:hover {
   border-radius: 15px;
   font-weight: 900;
 }
+
+/* safary only */
+@media not all and (min-resolution: 0.001dpcm) {
+  @supports (-webkit-appearance: none) {
+    .calculator-box {
+      outline-style: none;
+    }
+  }
+} ;

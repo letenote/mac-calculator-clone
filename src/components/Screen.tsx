@@ -33,7 +33,7 @@ const Screen: FC= () => {
       <p 
         className="screen-top" 
         style={{ 
-          fontSize: "clamp(1rem, -0.875rem + 8.333vw, 3.5rem)" 
+          fontSize: "clamp(1rem, -0.875rem + 8.333vw, 2.5rem)" 
         }}
       >
         100
