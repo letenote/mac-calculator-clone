@@ -6,7 +6,7 @@ import { RootState } from "../../store";
 import { ErrorMessage } from "../../../constant/ErrorMessage";
 
 export const onChangeOutputAction = (value: string) => {
-  return (dispatch: Dispatch<OutputActionInterface>) => {
+  return async (dispatch: Dispatch<OutputActionInterface>): Promise<void> => {
     dispatch({
       type: typeController(value),
       payload: value,

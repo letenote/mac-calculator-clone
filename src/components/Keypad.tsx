@@ -6,6 +6,7 @@ import { Theme } from "../constant/Theme";
 import { generateButtonBgColor } from "../helper/generateButtonBgColor";
 import * as outputActionCreators from "../redux/actions/output-action";
 import { ButtonInterface } from "../constant/buttons";
+import type { CalculatorActivityDispatchTypes } from "../redux/actions/output-action/dispatch-types";
 
 const keypadContainerStyles: CSSProperties = {
   height: "75%",
@@ -24,7 +25,9 @@ const Keypad: FC = () => {
     onChangeOperatorClickAction,
   } = bindActionCreators(outputActionCreators, dispatch);
 
-  const onClickHandler = (button: ButtonInterface) => {
+  const onClickHandler = (
+    button: ButtonInterface
+  ): CalculatorActivityDispatchTypes => {
     switch (button.id) {
       case "button_=":
         return (
