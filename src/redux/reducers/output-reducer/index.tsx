@@ -30,16 +30,16 @@ export const OutputReducer = ( state: OutputReducerInterface = initialState, act
         log: "",
         output: ""
       }
-    // case OutputActionTypes.ONCHANGE_IS_MINUS:
-    //   let clearMinus = state.log.split("");
-    //   state.isMinus && (clearMinus[0] = "");
-    //   return {
-    //     ...state,
-    //     log: state.isMinus 
-    //       ? clearMinus.join("")
-    //       : `-${state.log}`,
-    //     isMinus: !state.isMinus
-    //   }
+    case OutputActionTypes.ONCHANGE_IS_MINUS:
+      let clearMinus = state.log.split("");
+      state.isMinus && (clearMinus[0] = "");
+      return {
+        ...state,
+        log: state.isMinus 
+          ? clearMinus.join("")
+          : state.log === "" ? "" : `-${state.log}`,
+        isMinus: state.log === "" ? false : !state.isMinus
+      }
     case OutputActionTypes.ONCHANGE_CALCULATE:
       return {
         ...state,

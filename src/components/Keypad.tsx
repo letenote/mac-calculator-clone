@@ -5,6 +5,7 @@ import { buttons } from "../constant/buttons";
 import { Theme } from "../constant/Theme";
 import { generateButtonBgColor } from "../helper/generateButtonBgColor";
 import * as outputActionCreators from '../redux/actions/output-action';
+import { ButtonInterface } from '../constant/buttons';
 
 const keypadContainerStyles: CSSProperties = {
   height: "75%",
@@ -17,6 +18,25 @@ const keypadContainerStyles: CSSProperties = {
 const Keypad: FC= () => {
   const dispatch = useDispatch();
   const { onChangeOutputAction, onChangeCalculateAction, onChangePercentCalculateAction, onChangeOperatorClickAction } = bindActionCreators(outputActionCreators, dispatch);
+  
+  const onClickHandler = ( button: ButtonInterface ) => {
+    switch (button.id) {
+      case "button_=":
+        return (
+          onChangeOperatorClickAction(button.value),
+          onChangeCalculateAction()
+        )
+      case "button_%":
+        return onChangePercentCalculateAction();
+      case "button_÷":
+      case "button_*":
+      case "button_-":
+      case "button_+":
+        return onChangeOperatorClickAction(button.value)
+      default:
+        return onChangeOutputAction(button.value)
+    }
+  }
   
   return(
     <div style={keypadContainerStyles}>
@@ -38,16 +58,7 @@ const Keypad: FC= () => {
                 button.id === "button_=" && { "borderBottomRightRadius": "10px" }
               )} 
               type={'button'}
-              disabled={button.id === "button_+/-" ? true : false}
-              onClick={() => {
-                button.value === "="
-                  ? (onChangeOperatorClickAction(button.value),onChangeCalculateAction())
-                  : button.value === "%"
-                    ? onChangePercentCalculateAction()
-                    : button.value === "/" || button.value === "*" || button.value === "-" || button.value === "+"
-                      ? onChangeOperatorClickAction(button.value)
-                      : onChangeOutputAction(button.value)
-              }}
+              onClick={() => onClickHandler(button)}
             >
               { button.display }
             </button>
