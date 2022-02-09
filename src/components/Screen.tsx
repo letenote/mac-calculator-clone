@@ -1,62 +1,75 @@
-import React, { CSSProperties, FC, Fragment, memo } from "react";
+import React, { CSSProperties, FC, memo, useCallback } from "react";
 import { useSelector } from "react-redux";
 import { RootState } from "../redux/store";
-import { calculate } from "../helper/calculate";
 import { ErrorMessage } from "../constant/ErrorMessage";
+import useFitText from "use-fit-text";
 
 const screenGroupStyles: CSSProperties = {
   height: "25%",
-  padding: "10px 10px 0px 10px",
+  padding: "10px 10px 5px 10px",
   display: "flex",
+  flexDirection: "column",
+  justifyContent: "space-between",
 };
 
 const miniButtonGroupStyles: CSSProperties = {
   display: "flex",
   justifyContent: "space-between",
-  width: 50,
-  position: "absolute",
+  width: "25%",
+};
+
+const logScreenStyles: CSSProperties = {
+  color: "grey",
+  overflow: "hidden",
+  textOverflow: "ellipsis",
+  width: "70%",
+  whiteSpace: "nowrap",
+  textAlign: "right",
+  fontSize: 12,
 };
 
 const Screen: FC = () => {
+  const onStart = useCallback(() => {
+    console.log("fit text started");
+  }, []);
+  const onFinish = useCallback((fontSize: number) => {
+    console.log("fit text resizing finished", fontSize);
+  }, []);
+  const { fontSize, ref } = useFitText({
+    maxFontSize: 225,
+    minFontSize: 1,
+    onStart,
+    onFinish,
+  });
   const app_screen = useSelector((state: RootState) => state.screen);
-  const screenFontSizeDefault = 36;
-  console.log("calculate is error", calculate("10%"));
-  console.log("calculate length", app_screen.log.length);
   return (
     <div style={screenGroupStyles}>
-      <div style={miniButtonGroupStyles}>
-        {["DE564F", "EDBB3F", "75C84E"].map((button, index) => {
-          return (
-            <div
-              key={index}
-              className={"miniButton"}
-              style={{ backgroundColor: `#${button}` }}
-            />
-          );
-        })}
+      <div style={{ display: "flex", justifyContent: "space-between" }}>
+        <div style={miniButtonGroupStyles}>
+          {["DE564F", "EDBB3F", "75C84E"].map((button, index) => {
+            return (
+              <div
+                key={index}
+                className={"miniButton"}
+                style={{ backgroundColor: `#${button}` }}
+              />
+            );
+          })}
+        </div>
+        <div style={logScreenStyles}>
+          {app_screen.log === ErrorMessage.NAN ? "" : app_screen.log}
+        </div>
       </div>
-      <span
+      <div
+        ref={ref}
         style={{
-          position: "absolute",
-          right: "10px",
-          color: "grey",
-        }}
-      >
-        {app_screen.log}
-      </span>
-      <p
-        className="screen-top"
-        style={{
-          // fontSize: "clamp(1rem, -0.875rem + 8.333vw, 3.5rem)"
-          fontSize: `${
-            app_screen.output === ErrorMessage.NAN
-              ? "28"
-              : screenFontSizeDefault
-          }px`,
+          fontSize: app_screen.output === ErrorMessage.NAN ? 28 : fontSize,
+          textAlign: "right",
+          color: "white",
         }}
       >
         {app_screen.output === "" ? "0" : app_screen.output}
-      </p>
+      </div>
     </div>
   );
 };

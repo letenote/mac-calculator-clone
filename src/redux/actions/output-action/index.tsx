@@ -51,10 +51,12 @@ export const onChangePercentCalculateAction = () => {
 };
 
 export const generateOutput = (value: string): string => {
+  let getOutput: string;
   try {
-    let getOutput = calculate(value);
-    return getOutput.toString();
-  } catch (error) {
+    getOutput = calculate(value);
+    return getOutput;
+  } catch (err) {
+    console.error(err);
     return ErrorMessage.NAN;
   }
 };

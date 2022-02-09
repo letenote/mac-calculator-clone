@@ -21,7 +21,6 @@ beforeEach(() => {
 describe("__REDUX_CONNECTED", () => {
   it("create snapshoot", () => {
     const tree = myApp.toJSON();
-    console.log("tree", tree);
     expect(tree).toMatchSnapshot();
   });
 });

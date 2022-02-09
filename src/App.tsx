@@ -8,48 +8,35 @@ import { bindActionCreators } from "redux";
 import * as configActionCreators from "./redux/actions/config-action";
 
 const App: React.FC<{}> = () => {
-  const app_config = useSelector((state: RootState) => state.config);
+  const { isDarkmode } = useSelector((state: RootState) => state.config);
   const dispatch = useDispatch();
   const { changeDarkmodeAction, changeLightmodeAction } = bindActionCreators(
     configActionCreators,
     dispatch
   );
-  const getThemeButton: string = app_config.isDarkmode
-    ? Theme.dark_color
-    : Theme.light_color;
-  document.body.style.backgroundColor = app_config.isDarkmode
-    ? Theme.dark_backgroundColor
-    : Theme.light_backgroundColor;
+  let getThemeButton: string = Theme[`${isDarkmode ? "dark" : "light"}_color`];
+  document.body.style.backgroundColor = Theme[`${isDarkmode ? "dark" : "light"}_backgroundColor`];
   return (
     <>
-      <span
-        className="deploy-date-text"
-        style={{
-          color: getThemeButton,
-        }}
-      >
-        Deployed: 09/01/2021
+      <span className="deploy-date-text" style={{ color: getThemeButton }}>
+        Deployed: 10/01/2021
       </span>
       <span
         className="theme_button"
-        style={{
-          borderColor: getThemeButton,
-          color: getThemeButton,
-        }}
+        style={{ borderColor: getThemeButton, color: getThemeButton }}
         onClick={() => {
-          return app_config.isDarkmode
-            ? changeLightmodeAction()
-            : changeDarkmodeAction();
+          return isDarkmode ? changeLightmodeAction() : changeDarkmodeAction();
         }}
       >
-        {`${app_config.isDarkmode ? "Light" : "Dark"} Mode`}
+        {`${isDarkmode ? "Light" : "Dark"} Mode`}
       </span>
       <div
         className="calculator-box"
         style={Object.assign({
-          backgroundColor: app_config.isDarkmode
-            ? Theme.dark_backgroundColor_calculator
-            : Theme.light_backgroundColor_calculator,
+          backgroundColor:
+            Theme[
+            `${isDarkmode ? "dark" : "light"}_backgroundColor_calculator`
+            ],
         })}
       >
         <Screen />

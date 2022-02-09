@@ -31,7 +31,8 @@ const Keypad: FC = () => {
     switch (button.id) {
       case "button_=":
         return (
-          onChangeOperatorClickAction(button.value), onChangeCalculateAction()
+          onChangeOperatorClickAction(button.value),
+          onChangeCalculateAction()
         );
       case "button_%":
         return onChangePercentCalculateAction();
@@ -57,10 +58,9 @@ const Keypad: FC = () => {
                 width: button.id === "button_0" ? "50%" : "25%",
                 backgroundColor: generateButtonBgColor(button.id),
                 height: "20%",
-                fontSize:
-                  button.id === "button_÷" || button.id === "button_-"
-                    ? 20
-                    : 14,
+                fontSize: button.id === "button_÷" || button.id === "button_-"
+                  ? 20
+                  : 14,
                 border: `solid ${Theme.light_backgroundColor_calculator} 0.1px`,
               },
               button.id === "button_0" && { borderBottomLeftRadius: "10px" },

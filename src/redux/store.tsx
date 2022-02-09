@@ -10,8 +10,7 @@ declare global {
 }
 
 const middleware = [thunk, logger];
-const composeEnhanchers =
-  window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+const composeEnhanchers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
 export const store = createStore(
   reducers,
