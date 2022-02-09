@@ -16,6 +16,14 @@ const App: React.FC<{}> = () => {
   return (
     <>
       <span 
+      className="deploy-date-text" 
+      style={{
+          color: getThemeButton
+        }}
+      >
+        Deployed: 09/01/2021
+      </span>
+      <span 
         className="theme_button"
         style={{
           borderColor: getThemeButton,

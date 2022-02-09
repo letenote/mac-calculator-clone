@@ -149,6 +149,13 @@ button:disabled {
   font-weight: 900;
 }
 
+.deploy-date-text {
+  position: absolute;
+  top: 15px;
+  left: 15px;
+  font-size: 8px;
+}
+
 /* safary only */
 @media not all and (min-resolution: 0.001dpcm) {
   @supports (-webkit-appearance: none) {

@@ -36,7 +36,7 @@ export const onChangePercentCalculateAction = () => {
   return ( dispatch: Dispatch<OutputActionInterface>, getState: () => RootState ): void => {
     dispatch({
       type: OutputActionTypes.ONCHANGE_CALCULATE,
-      payload: generateOutput(`${getState().screen.log}/100`)
+      payload: getState().screen.log === "" ? "" : generateOutput(`${getState().screen.log}/100`)
     })
   }
 };
