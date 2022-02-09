@@ -1,48 +1,46 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { RootState } from "./redux/reducers";
-import Screen from './components/Screen';
-import Keypad from './components/Keypad';
+import { RootState } from "./redux/store";
+import Screen from "./components/Screen";
+import Keypad from "./components/Keypad";
 import { Theme } from "./constant/Theme";
 import { bindActionCreators } from "redux";
-import * as configActionCreators from './redux/actions/config-action';
+import * as configActionCreators from "./redux/actions/config-action";
 
 const App: React.FC<{}> = () => {
-  const app_config = useSelector((state: RootState) => state.config);
+  const { isDarkmode } = useSelector((state: RootState) => state.config);
   const dispatch = useDispatch();
-  const { changeDarkmodeAction, changeLightmodeAction } = bindActionCreators(configActionCreators, dispatch);
-  const getThemeButton:string = app_config.isDarkmode ? Theme.dark_color : Theme.light_color;
-  document.body.style.backgroundColor = app_config.isDarkmode ? Theme.dark_backgroundColor : Theme.light_backgroundColor;
+  const { changeDarkmodeAction, changeLightmodeAction } = bindActionCreators(
+    configActionCreators,
+    dispatch
+  );
+  let getThemeButton: string = Theme[`${isDarkmode ? "dark" : "light"}_color`];
+  document.body.style.backgroundColor = Theme[`${isDarkmode ? "dark" : "light"}_backgroundColor`];
   return (
     <>
-      <span 
-      className="deploy-date-text" 
-      style={{
-          color: getThemeButton
-        }}
-      >
-        Deployed: 09/01/2021
+      <span className="deploy-date-text" style={{ color: getThemeButton }}>
+        Deployed: 10/01/2021
       </span>
-      <span 
+      <span
         className="theme_button"
-        style={{
-          borderColor: getThemeButton,
-          color: getThemeButton
-        }}
+        style={{ borderColor: getThemeButton, color: getThemeButton }}
         onClick={() => {
-          return app_config.isDarkmode ? changeLightmodeAction() : changeDarkmodeAction()
+          return isDarkmode ? changeLightmodeAction() : changeDarkmodeAction();
         }}
       >
-        {`${app_config.isDarkmode ? "Light" : "Dark"} Mode`}
+        {`${isDarkmode ? "Light" : "Dark"} Mode`}
       </span>
-      <div 
-        className="calculator-box" 
-        style={Object.assign(
-          { backgroundColor: app_config.isDarkmode ? Theme.dark_backgroundColor_calculator : Theme.light_backgroundColor_calculator }
-        )}
+      <div
+        className="calculator-box"
+        style={Object.assign({
+          backgroundColor:
+            Theme[
+            `${isDarkmode ? "dark" : "light"}_backgroundColor_calculator`
+            ],
+        })}
       >
-        <Screen/>
-        <Keypad/>
+        <Screen />
+        <Keypad />
       </div>
     </>
   );

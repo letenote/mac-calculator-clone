@@ -28,7 +28,7 @@ export function disableReactDevTools() {
   for (const prop in window.__REACT_DEVTOOLS_GLOBAL_HOOK__) {
     if (prop === "renderers") {
       // this line will remove that one console error
-      window.__REACT_DEVTOOLS_GLOBAL_HOOK__[prop] = new Map()
+      window.__REACT_DEVTOOLS_GLOBAL_HOOK__[prop] = new Map();
     } else {
       // Replace all of its properties with a no-op function or a null value
       // depending on their types

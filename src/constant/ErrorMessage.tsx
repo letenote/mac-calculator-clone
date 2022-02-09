@@ -1,3 +1,3 @@
 export enum ErrorMessage {
-  NAN = "Not a number"
+  NAN = "Not a number",
 }

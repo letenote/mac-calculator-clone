@@ -1,3 +1,3 @@
 export interface ConfigReducerInterface {
-  isDarkmode: boolean
+  isDarkmode: boolean;
 }

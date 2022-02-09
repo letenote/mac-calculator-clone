@@ -4,8 +4,9 @@ import { bindActionCreators } from "redux";
 import { buttons } from "../constant/buttons";
 import { Theme } from "../constant/Theme";
 import { generateButtonBgColor } from "../helper/generateButtonBgColor";
-import * as outputActionCreators from '../redux/actions/output-action';
-import { ButtonInterface } from '../constant/buttons';
+import * as outputActionCreators from "../redux/actions/output-action";
+import { ButtonInterface } from "../constant/buttons";
+import type { CalculatorActivityDispatchTypes } from "../redux/actions/output-action/dispatch-types";
 
 const keypadContainerStyles: CSSProperties = {
   height: "75%",
@@ -15,58 +16,65 @@ const keypadContainerStyles: CSSProperties = {
   flexWrap: "wrap",
 };
 
-const Keypad: FC= () => {
+const Keypad: FC = () => {
   const dispatch = useDispatch();
-  const { onChangeOutputAction, onChangeCalculateAction, onChangePercentCalculateAction, onChangeOperatorClickAction } = bindActionCreators(outputActionCreators, dispatch);
-  
-  const onClickHandler = ( button: ButtonInterface ) => {
+  const {
+    onChangeOutputAction,
+    onChangeCalculateAction,
+    onChangePercentCalculateAction,
+    onChangeOperatorClickAction,
+  } = bindActionCreators(outputActionCreators, dispatch);
+
+  const onClickHandler = (
+    button: ButtonInterface
+  ): CalculatorActivityDispatchTypes => {
     switch (button.id) {
       case "button_=":
         return (
           onChangeOperatorClickAction(button.value),
           onChangeCalculateAction()
-        )
+        );
       case "button_%":
         return onChangePercentCalculateAction();
       case "button_÷":
       case "button_*":
       case "button_-":
       case "button_+":
-        return onChangeOperatorClickAction(button.value)
+        return onChangeOperatorClickAction(button.value);
       default:
-        return onChangeOutputAction(button.value)
+        return onChangeOutputAction(button.value);
     }
-  }
-  
-  return(
+  };
+
+  return (
     <div style={keypadContainerStyles}>
-      {
-        buttons.map((button, buttonIndex) => {
-          return(
-            <button
-              key={buttonIndex}
-              className="button"
-              style={Object.assign(
-                {
-                  width: button.id === "button_0" ? "50%" : "25%",
-                  backgroundColor: generateButtonBgColor(button.id),
-                  height: "20%",
-                  fontSize: button.id === "button_÷" || button.id === "button_-" ? 20 : 14,
-                  border: `solid ${Theme.light_backgroundColor_calculator} 0.1px`
-                },
-                button.id === "button_0" && { "borderBottomLeftRadius": "10px" },
-                button.id === "button_=" && { "borderBottomRightRadius": "10px" }
-              )} 
-              type={'button'}
-              onClick={() => onClickHandler(button)}
-            >
-              { button.display }
-            </button>
-          )
-        })
-      }
+      {buttons.map((button, buttonIndex) => {
+        return (
+          <button
+            key={buttonIndex}
+            className="button"
+            style={Object.assign(
+              {
+                width: button.id === "button_0" ? "50%" : "25%",
+                backgroundColor: generateButtonBgColor(button.id),
+                height: "20%",
+                fontSize: button.id === "button_÷" || button.id === "button_-"
+                  ? 20
+                  : 14,
+                border: `solid ${Theme.light_backgroundColor_calculator} 0.1px`,
+              },
+              button.id === "button_0" && { borderBottomLeftRadius: "10px" },
+              button.id === "button_=" && { borderBottomRightRadius: "10px" }
+            )}
+            type={"button"}
+            onClick={() => onClickHandler(button)}
+          >
+            {button.display}
+          </button>
+        );
+      })}
     </div>
-  )
+  );
 };
 
 export default memo(Keypad);
