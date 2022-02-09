@@ -49,10 +49,17 @@ module.exports = {
     new HtmlWebpackPlugin({
       // new update props
       // check https://github.com/jantimon/html-webpack-plugin#options
+      title: 'Mac Calculator Clone',
       template: commonPaths.templatePath,
-      scriptLoading: "module",
+      filename: 'index.html',
+      scriptLoading: "defer", // {'blocking'|'defer'|'module'}
       inject: true,
+      minify: true,
+      hash: true,
+      cache: true,
       meta: {
+        // 'Content-Security-Policy': { 'http-equiv': 'Content-Security-Policy', 'content': 'default-src https:' },
+        // 'set-cookie': { 'http-equiv': 'set-cookie', content: 'name=value; expires=date; path=url' },
         "theme-color": "#ffffff",
         "description": "Mac Calculator Clone Using React Typescript, Redux, and unit test using Jest - RTL",
         "og:type": "website",
@@ -60,8 +67,10 @@ module.exports = {
         "og:url": "https://trusting-jepsen-7e7a9c.netlify.app",
         "og:image": "https://lumiere-a.akamaihd.net/v1/images/og-dt-b_42666fa8.jpeg?region=0%2C0%2C400%2C400",
       },
-      minify: true,
-      hash: true,
+      'base': {
+        'href': 'http://localhost:8989/index.html',
+        'target': '_blank'
+      }
     }),
     new CopyWebpackPlugin({
       patterns: [
