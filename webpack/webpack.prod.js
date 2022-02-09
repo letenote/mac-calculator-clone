@@ -7,6 +7,7 @@ const CopyWebpackPlugin = require("copy-webpack-plugin");
 const CompressionPlugin = require("compression-webpack-plugin");
 const zlib = require("zlib");
 const { BundleStatsWebpackPlugin } = require("bundle-stats-webpack-plugin");
+const FontPreloadPlugin = require("webpack-font-preload-plugin");
 
 module.exports = {
   mode: "production",
@@ -108,8 +109,7 @@ module.exports = {
                 modifyVars: {
                   "primary-color": commonPaths.antdModifyVar["primary-color"],
                   "link-color": commonPaths.antdModifyVar["link-color"],
-                  "border-radius-base":
-                    commonPaths.antdModifyVar["border-radius-base"],
+                  "border-radius-base": commonPaths.antdModifyVar["border-radius-base"],
                   "font-size-base": commonPaths.antdModifyVar["font-size-base"],
                 },
                 javascriptEnabled: true,
@@ -134,6 +134,13 @@ module.exports = {
         { from: commonPaths.manifest, to: commonPaths.outputPath_prod },
         { from: commonPaths._redirects, to: commonPaths.outputPath_prod },
       ],
+    }),
+    new FontPreloadPlugin({
+      index: "index.html",
+      extensions: ["woff", "ttf", "eot"],
+      crossorigin: true,
+      loadType: "preload",
+      insertBefore: "head > link",
     }),
     new CompressionPlugin({
       filename: "[path][base].gz",

@@ -16,7 +16,7 @@
   "scripts": {
     "dev": "rm -rf dist && cross-env NODE_ENV=development webpack-dev-server --open",
     "staging": "rm -rf build && npm run prod && serve -s -p 8989 build",
-    "prod": "rm -rf build && npm run test:clean && npm run test && cross-env NODE_ENV=production webpack",
+    "prod": "rm -rf build && npm run test && cross-env NODE_ENV=production webpack",
     "build:serve": "rm -rf build && npm run prod && serve -s -p 8989",
     "test": "jest --env=jsdom --updateSnapshot",
     "test:watch": "jest --env=jsdom --updateSnapshot --watchAll",
@@ -142,6 +142,7 @@
     "webpack": "^5.68.0",
     "webpack-cli": "^4.9.2",
     "webpack-dev-server": "^4.7.3",
+    "webpack-font-preload-plugin": "^1.5.0",
     "webpack-manifest-plugin": "^4.1.1",
     "webpack-merge": "^5.8.0",
     "webpack-nano": "^1.1.1"
