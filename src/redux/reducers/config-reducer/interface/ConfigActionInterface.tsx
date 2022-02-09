@@ -1,11 +1,13 @@
-import { ConfigActionTypes } from '../action-type';
+import { ConfigActionTypes } from "../action-type";
 
 interface ChangeDarkmodeInterface {
-  type: ConfigActionTypes.CHANGE_DARKMODE,
+  type: ConfigActionTypes.CHANGE_DARKMODE;
 }
 
 interface ChangeLightmodeInterface {
-  type: ConfigActionTypes.CHANGE_LIGHTMODE,
+  type: ConfigActionTypes.CHANGE_LIGHTMODE;
 }
 
-export type ConfigActionInterface = ChangeDarkmodeInterface | ChangeLightmodeInterface
+export type ConfigActionInterface =
+  | ChangeDarkmodeInterface
+  | ChangeLightmodeInterface;

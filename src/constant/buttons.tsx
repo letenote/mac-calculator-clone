@@ -1,7 +1,7 @@
 export interface ButtonInterface {
-  id: string
-  display: string,
-  value: string 
+  id: string;
+  display: string;
+  value: string;
 }
 
 export const buttons: Array<ButtonInterface> = [
