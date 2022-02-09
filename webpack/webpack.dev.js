@@ -6,6 +6,7 @@ module.exports = {
     filename: "[name].js",
     publicPath: "/",
     chunkFilename: "[name].js",
+    clean: true,
   },
   devtool: "inline-source-map",
   devServer: {
@@ -44,8 +45,7 @@ module.exports = {
                 modifyVars: {
                   "primary-color": commonPaths.antdModifyVar["primary-color"],
                   "link-color": commonPaths.antdModifyVar["link-color"],
-                  "border-radius-base":
-                    commonPaths.antdModifyVar["border-radius-base"],
+                  "border-radius-base": commonPaths.antdModifyVar["border-radius-base"],
                   "font-size-base": commonPaths.antdModifyVar["font-size-base"],
                 },
                 javascriptEnabled: true,
@@ -67,6 +67,13 @@ module.exports = {
           },
           "sass-loader",
         ],
+      },
+      {
+        test: /\.(woff|woff2|eot|ttf|otf)$/i,
+        type: 'asset/resource',
+        generator: {
+          filename: `${commonPaths.fontsFolder}/[name].[ext]`,
+        },
       },
     ],
   },

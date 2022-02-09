@@ -136,11 +136,8 @@ module.exports = {
       ],
     }),
     new FontPreloadPlugin({
-      index: "index.html",
-      extensions: ["woff", "ttf", "eot"],
       crossorigin: true,
       loadType: "preload",
-      insertBefore: "head > link",
     }),
     new CompressionPlugin({
       filename: "[path][base].gz",
