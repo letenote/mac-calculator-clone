@@ -8,6 +8,8 @@ const CompressionPlugin = require("compression-webpack-plugin");
 const zlib = require("zlib");
 const { BundleStatsWebpackPlugin } = require("bundle-stats-webpack-plugin");
 const FontPreloadPlugin = require("webpack-font-preload-plugin");
+const HtmlWebpackInjectPreload = require('@principalstudio/html-webpack-inject-preload');
+const CssMinimizerPlugin = require("css-minimizer-webpack-plugin");
 
 module.exports = {
   mode: "production",
@@ -16,6 +18,7 @@ module.exports = {
     path: commonPaths.outputPath_prod,
     publicPath: "/",
     chunkFilename: `${commonPaths.jsFolder}/[chunkhash].[name].js`,
+    clean: true
   },
   cache: {
     type: "filesystem",
@@ -39,12 +42,19 @@ module.exports = {
           },
         },
       }),
+      new CssMinimizerPlugin(),
     ],
     runtimeChunk: {
       name: "manifest",
     },
     splitChunks: {
       cacheGroups: {
+        styles: {
+          name: "styles",
+          type: "css/mini-extract",
+          chunks: "all",
+          enforce: true,
+        },
         antd: {
           test: /[\\/]node_modules[\\/](antd)[\\/]/,
           name: "antd",
@@ -76,19 +86,23 @@ module.exports = {
   },
   module: {
     rules: [
+      // {
+      //   test: /\.(css|s[ac]ss)$/i,
+      //   use: [
+      //     MiniCssExtractPlugin.loader,
+      //     {
+      //       loader: "css-loader",
+      //       options: {
+      //         sourceMap: false,
+      //         modules: false,
+      //       },
+      //     },
+      //     "sass-loader",
+      //   ],
+      // },
       {
         test: /\.(css|s[ac]ss)$/i,
-        use: [
-          MiniCssExtractPlugin.loader,
-          {
-            loader: "css-loader",
-            options: {
-              sourceMap: false,
-              modules: false,
-            },
-          },
-          "sass-loader",
-        ],
+        use: [MiniCssExtractPlugin.loader, "css-loader", "sass-loader"],
       },
       {
         test: /\.less$/,
@@ -136,11 +150,16 @@ module.exports = {
       ],
     }),
     new FontPreloadPlugin({
-      index: "index.html",
-      extensions: ["woff", "ttf", "eot"],
       crossorigin: true,
       loadType: "preload",
-      insertBefore: "head > link",
+    }),
+    new HtmlWebpackInjectPreload({
+      files: [
+        {
+          match: /.*\.css$/,
+          attributes: { as: "style", onload: "this.onload=null;this.rel='stylesheet'" },
+        },
+      ]
     }),
     new CompressionPlugin({
       filename: "[path][base].gz",

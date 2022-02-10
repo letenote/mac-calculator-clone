@@ -18,13 +18,13 @@ module.exports = {
         exclude: /node_modules/,
         use: ["ts-loader"],
       },
-      {
-        test: /\.(woff2|ttf|woff|eot)$/,
-        type: "asset/resource",
-        generator: {
-          filename: `${commonPaths.fontsFolder}/[hash].[ext]`,
-        },
-      },
+      // {
+      //   test: /\.(woff|woff2|eot|ttf|otf)$/i,
+      //   type: "asset/resource",
+      //   generator: {
+      //     filename: `${commonPaths.fontsFolder}/[name].[ext]`,
+      //   },
+      // },
       {
         test: /\.(jpg|jpeg|png|gif|mp3|svg)$/,
         use: [
@@ -55,7 +55,7 @@ module.exports = {
       scriptLoading: "defer", // {'blocking'|'defer'|'module'}
       inject: true,
       minify: true,
-      hash: true,
+      hash: false,
       cache: true,
       meta: {
         // 'Content-Security-Policy': { 'http-equiv': 'Content-Security-Policy', 'content': 'default-src https:' },
@@ -68,7 +68,7 @@ module.exports = {
         "og:image": "https://lumiere-a.akamaihd.net/v1/images/og-dt-b_42666fa8.jpeg?region=0%2C0%2C400%2C400",
       },
       'base': {
-        'href': 'http://localhost:8989/index.html',
+        'href': 'https://trusting-jepsen-7e7a9c.netlify.app/index.html',
         'target': '_blank'
       }
     }),
