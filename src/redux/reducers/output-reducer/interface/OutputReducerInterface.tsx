@@ -3,4 +3,5 @@ export interface OutputReducerInterface {
   log: string;
   isMinus: boolean;
   isOperatorClick: boolean;
+  isFinishCalculate: boolean;
 }

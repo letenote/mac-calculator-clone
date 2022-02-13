@@ -30,10 +30,11 @@ const Keypad: FC = () => {
   ): CalculatorActivityDispatchTypes => {
     switch (button.id) {
       case "button_=":
-        return (
-          onChangeOperatorClickAction(button.value),
-          onChangeCalculateAction()
-        );
+        return onChangeCalculateAction()
+      // return (
+      //   onChangeOperatorClickAction(button.value),
+      //   onChangeCalculateAction()
+      // );
       case "button_%":
         return onChangePercentCalculateAction();
       case "button_÷":
@@ -53,6 +54,7 @@ const Keypad: FC = () => {
           <button
             key={buttonIndex}
             className="button"
+            data-testid={button.id}
             style={Object.assign(
               {
                 width: button.id === "button_0" ? "50%" : "25%",

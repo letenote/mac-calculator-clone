@@ -56,7 +56,7 @@ export const generateOutput = (value: string): string => {
     getOutput = calculate(value);
     return getOutput;
   } catch (err) {
-    console.error(err);
+    process.env.NODE_ENV === "development" && console.error(err);
     return ErrorMessage.NAN;
   }
 };

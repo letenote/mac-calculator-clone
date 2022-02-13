@@ -56,12 +56,13 @@ const Screen: FC = () => {
             );
           })}
         </div>
-        <div style={logScreenStyles}>
+        <div style={logScreenStyles} data-testid={"screen_log_value"}>
           {app_screen.log === ErrorMessage.NAN ? "" : app_screen.log}
         </div>
       </div>
       <div
         ref={ref}
+        data-testid={"screen_output_value"}
         style={{
           fontSize: app_screen.output === ErrorMessage.NAN ? 28 : fontSize,
           textAlign: "right",
