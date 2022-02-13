@@ -55,7 +55,7 @@ module.exports = {
       scriptLoading: "defer", // {'blocking'|'defer'|'module'}
       inject: true,
       minify: true,
-      hash: false,
+      hash: false, // set true if using serviceworker
       cache: true,
       meta: {
         // 'Content-Security-Policy': { 'http-equiv': 'Content-Security-Policy', 'content': 'default-src https:' },
@@ -67,10 +67,10 @@ module.exports = {
         "og:url": "https://trusting-jepsen-7e7a9c.netlify.app",
         "og:image": "https://lumiere-a.akamaihd.net/v1/images/og-dt-b_42666fa8.jpeg?region=0%2C0%2C400%2C400",
       },
-      'base': {
-        'href': 'https://trusting-jepsen-7e7a9c.netlify.app/index.html',
-        'target': '_blank'
-      }
+      // 'base': {
+      //   'href': 'https://trusting-jepsen-7e7a9c.netlify.app/index.html',
+      //   'target': '_blank'
+      // }
     }),
     new CopyWebpackPlugin({
       patterns: [
