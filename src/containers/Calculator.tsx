@@ -12,6 +12,7 @@ const Calculator: React.FC<{}> = () => {
   return (
     <div
       className="calculator-box"
+      data-testid="calculator-box"
       style={Object.assign({
         backgroundColor:
           Theme[
