@@ -8,6 +8,7 @@ export const initialState = {
   log: "",
   isMinus: false,
   isOperatorClick: false,
+  isFinishCalculate: false
 };
 
 export const OutputReducer = (
@@ -20,40 +21,52 @@ export const OutputReducer = (
         ...state,
         isOperatorClick: true,
         log: `${state.log === "" ? "" : state.log}` + action.payload,
+        isFinishCalculate: false
       };
+
     case OutputActionTypes.ONCHANGE_OUTPUT:
       return {
         ...state,
         log: state.log === ErrorMessage.NAN
           ? action.payload
-          : `${state.log === "" ? "" : state.log}` + action.payload,
-        output: state.isOperatorClick
+          : state.isFinishCalculate
+            ? action.payload
+            : `${state.log === "" ? "" : state.log}` + action.payload,
+        output: state.isOperatorClick || state.isFinishCalculate
           ? action.payload
           : `${state.output === "" ? "" : state.output}` + action.payload,
         isOperatorClick: false,
+        isFinishCalculate: false
       };
+
     case OutputActionTypes.ONCHANGE_CLEAR_OUTPUT:
       return {
         ...state,
         log: "",
         output: "",
+        isMinus: false,
+        isOperatorClick: false,
+        isFinishCalculate: false
       };
+
     case OutputActionTypes.ONCHANGE_IS_MINUS:
       let clearMinus = state.log.split("");
       state.isMinus && (clearMinus[0] = "");
+      const getValue = state.isMinus
+        ? clearMinus.join("")
+        : state.log === ""
+          ? ""
+          : `-${state.log}`
       return {
         ...state,
-        log: state.isMinus
-          ? clearMinus.join("")
-          : state.log === ""
-            ? ""
-            : `-${state.log}`,
+        log: getValue,
+        output: getValue,
         isMinus: state.log === "" ? false : !state.isMinus,
       };
     case OutputActionTypes.ONCHANGE_CALCULATE:
       return {
         ...state,
-        log: action.payload,
+        isFinishCalculate: true,
         isMinus: false,
         output: action.payload,
       };
